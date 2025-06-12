@@ -1,0 +1,9 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: service-user
+  data:
+    mongodb:
+      uri: mongodb+srv://${MONGO_USER}:${MONGO_PASS}@users.vwnkaua.mongodb.net/user?retryWrites=true&w=majority&appName=users
