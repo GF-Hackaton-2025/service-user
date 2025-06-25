@@ -1,4 +1,4 @@
-package br.com.user.webui.domain.response.logincontroller;
+package br.com.user.webui.domain.response.authcontroller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ExecuteLoginResponse {
+public class LoginResponse {
 
   private String accessToken;
   private String type;

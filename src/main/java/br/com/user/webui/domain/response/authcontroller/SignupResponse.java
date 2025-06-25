@@ -1,4 +1,4 @@
-package br.com.user.webui.domain.response.usercontroller;
+package br.com.user.webui.domain.response.authcontroller;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import static br.com.user.webui.description.Descriptions.USER;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterUserResponse {
+public class SignupResponse {
 
   @Schema(description = ID_USER)
   private String id;

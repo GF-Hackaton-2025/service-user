@@ -1,10 +1,12 @@
 package br.com.user.webui.controller;
 
-import br.com.user.app.services.LoginService;
-import br.com.user.webui.converters.LoginConverter;
-import br.com.user.webui.domain.request.logincontroller.ExecuteLoginRequest;
+import br.com.user.app.services.AuthService;
+import br.com.user.webui.converters.AuthConverter;
+import br.com.user.webui.domain.request.authcontroller.LoginRequest;
+import br.com.user.webui.domain.request.authcontroller.SignupRequest;
 import br.com.user.webui.domain.response.ErrorResponse;
-import br.com.user.webui.domain.response.logincontroller.ExecuteLoginResponse;
+import br.com.user.webui.domain.response.authcontroller.LoginResponse;
+import br.com.user.webui.domain.response.authcontroller.SignupResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +31,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/v1/login")
+@RequestMapping(value = "/auth")
 @Tag(name = "Login", description = "Operations related to login")
 @ApiResponse(responseCode = "401", description = "Unauthorized",
   content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
@@ -39,21 +41,36 @@ import static org.springframework.http.HttpStatus.CREATED;
   content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
 @ApiResponse(responseCode = "500", description = "Internal Server Error",
   content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
-public class LoginController {
+public class AuthController {
 
-  private final LoginService loginService;
+  private final AuthService authService;
 
-  @PostMapping
+  @PostMapping("/login")
   @ResponseStatus(CREATED)
   @Operation(summary = "Login", description = "Login")
   @ApiResponse(responseCode = "200", description = "Get token successfuly")
-  public Mono<ExecuteLoginResponse> executeLogin(
+  public Mono<LoginResponse> login(
     @RequestBody @Valid
-    final ExecuteLoginRequest loginRequest) {
+    final LoginRequest loginRequest) {
 
-    return Mono.just(LoginConverter.convertToExecuteLoginDTO(loginRequest))
-      .flatMap(loginService::executeLogin)
-      .map(LoginConverter::convertToExecuteLoginResponse)
+    return Mono.just(AuthConverter.convertToLoginDTO(loginRequest))
+      .flatMap(authService::login)
+      .map(AuthConverter::convertToLoginResponse)
       .contextWrite(Context.of(REQUEST_ID, UUID.randomUUID().toString()));
   }
+
+  @PostMapping("/signup")
+  @ResponseStatus(CREATED)
+  @Operation(summary = "Create user", description = "Create user")
+  @ApiResponse(responseCode = "201", description = "User completed successfuly")
+  public Mono<SignupResponse> signup(
+    @RequestBody @Valid
+    final SignupRequest signupRequest) {
+
+    return Mono.just(AuthConverter.convertToSignupDTO(signupRequest))
+      .flatMap(authService::signup)
+      .map(AuthConverter::convertToSignupResponse)
+      .contextWrite(Context.of(REQUEST_ID, UUID.randomUUID().toString()));
+  }
+
 }

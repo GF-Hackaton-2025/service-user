@@ -5,15 +5,15 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Strings {
 
-  public boolean isEmpty(String value) {
+  public static boolean isEmpty(String value) {
     return (value == null) || value.isEmpty();
   }
 
-  public boolean isNonEmpty(String value) {
+  public static boolean isNonEmpty(String value) {
     return (value != null) && !value.isEmpty();
   }
 
-  public boolean isAnyEquals(String value, String... items) {
+  public static boolean isAnyEquals(String value, String... items) {
     for(String item : items) {
       if (equals(value, item)) {
         return true;
@@ -23,11 +23,15 @@ public class Strings {
     return false;
   }
 
-  public boolean equals(String a, String b) {
+  public static boolean equals(String a, String b) {
     if (a != null && b != null) {
       return a.equalsIgnoreCase(b);
     } else {
       return a == b;
     }
+  }
+
+  public static boolean startsWith(String text, String prefix) {
+    return text != null && prefix != null ? text.toLowerCase().startsWith(prefix.toLowerCase()) : false;
   }
 }

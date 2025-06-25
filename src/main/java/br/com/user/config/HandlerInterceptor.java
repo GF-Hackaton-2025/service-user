@@ -3,7 +3,6 @@ package br.com.user.config;
 import br.com.user.app.exception.UnauthorizedException;
 import br.com.user.errors.Errors;
 import br.com.user.utils.JwtBuilder;
-import br.com.user.utils.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -11,6 +10,7 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 import static br.com.user.utils.Strings.isEmpty;
+import static br.com.user.utils.Strings.startsWith;
 
 @Component
 public class HandlerInterceptor implements WebFilter {
@@ -18,7 +18,7 @@ public class HandlerInterceptor implements WebFilter {
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
     return Mono.just(exchange.getRequest().getURI().getPath())
-      .filter(path -> !Strings.isAnyEquals(path, "/v1/user", "/v1/login"))
+      .filter(path -> startsWith(path, "/api/v1"))
       .flatMap(path -> validateToken(exchange))
       .switchIfEmpty(Mono.defer(() -> chain.filter(exchange)))
       .then();

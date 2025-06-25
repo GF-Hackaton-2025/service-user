@@ -1,4 +1,4 @@
-package br.com.user.webui.domain.request.logincontroller;
+package br.com.user.webui.domain.request.authcontroller;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ import static br.com.user.webui.description.Descriptions.USER;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExecuteLoginRequest {
+public class LoginRequest {
 
   @Schema(description = USER)
   @NotBlank(message = FIELD_REQUIRED)
