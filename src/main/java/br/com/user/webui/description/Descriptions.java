@@ -18,5 +18,7 @@ public class Descriptions {
   public static final String USER = "User to login";
   public static final String PASSWORD = "Password of the user";
   public static final String EMAIL = "User email";
+  public static final String ACCESS_TOKEN = "Access token for the user";
+  public static final String TYPE = "Type of the user";
 
 }

@@ -13,7 +13,7 @@ public class OpenApiConfig {
   public GroupedOpenApi publicApi() {
     return GroupedOpenApi.builder()
       .group("service-user")
-      .pathsToMatch("/v1/**")
+      .pathsToMatch("/**")
       .build();
   }
 
