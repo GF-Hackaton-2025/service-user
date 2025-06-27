@@ -12,14 +12,14 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class AuthConverter {
 
-  public LoginDTO convertToLoginDTO(LoginRequest request) {
+  public static LoginDTO convertToLoginDTO(LoginRequest request) {
     return LoginDTO.builder()
         .user(request.getUser())
         .password(request.getPassword())
         .build();
   }
 
-  public LoginResponse convertToLoginResponse(User user) {
+  public static LoginResponse convertToLoginResponse(User user) {
     return LoginResponse.builder()
       .type("Bearer")
       .accessToken(user.getAccessToken())

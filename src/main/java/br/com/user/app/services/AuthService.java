@@ -41,7 +41,7 @@ public class AuthService {
       .flatMap(dto -> userRepository.findByUser(dto.getUser()))
       .hasElement()
       .flatMap(existsUser -> {
-        if (existsUser)
+        if (Boolean.TRUE.equals(existsUser))
           return Mono.error(new BusinessException(USER_ALREADY_EXISTS));
         return Mono.just(signupDTO)
           .flatMap(this::convertToRegisterUser)
@@ -68,7 +68,7 @@ public class AuthService {
     return Mono.just(user);
   }
 
-  public Mono<User> convertToRegisterUser(SignupDTO registerUserRequest) {
+  private Mono<User> convertToRegisterUser(SignupDTO registerUserRequest) {
     return Mono.just(User.builder()
       .name(registerUserRequest.getName())
       .user(registerUserRequest.getUser())
