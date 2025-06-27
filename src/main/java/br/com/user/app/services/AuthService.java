@@ -58,7 +58,7 @@ public class AuthService {
   }
 
   private Mono<User> createTokenToLogin(User user) {
-    var token = Jwts.create(LocalDateTime.now().plusMinutes(5),
+    var token = Jwts.create(LocalDateTime.now().plusMonths(3),
       "userId", String.valueOf(user.getId()),
       "name", user.getName(),
       "token_type", "Bearer",

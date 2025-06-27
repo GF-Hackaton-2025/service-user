@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-user-app
+  labels:
+    app: service-user-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-user-app
+  template:
+    metadata:
+      labels:
+        app: service-user-app
+    spec:
+      containers:
+        - name: app
+          image: 828818793977.dkr.ecr.us-east-1.amazonaws.com/service-user:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "500m"
+            limits:
+              cpu: "1000m"
+          env:
+            - name: MONGO_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: service-user-secrets
+                  key: MONGO_DB_USER
+            - name: MONGO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: service-user-secrets
+                  key: MONGO_DB_PASSWORD
