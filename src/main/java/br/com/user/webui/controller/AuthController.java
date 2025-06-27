@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import static br.com.user.constants.Constants.REQUEST_ID;
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @Validated
 @RestController
@@ -45,8 +46,8 @@ public class AuthController {
 
   private final AuthService authService;
 
+  @ResponseStatus(OK)
   @PostMapping("/login")
-  @ResponseStatus(CREATED)
   @Operation(summary = "Login", description = "Login")
   @ApiResponse(responseCode = "200", description = "Get token successfuly")
   public Mono<LoginResponse> login(
@@ -59,8 +60,8 @@ public class AuthController {
       .contextWrite(Context.of(REQUEST_ID, UUID.randomUUID().toString()));
   }
 
-  @PostMapping("/signup")
   @ResponseStatus(CREATED)
+  @PostMapping("/signup")
   @Operation(summary = "Create user", description = "Create user")
   @ApiResponse(responseCode = "201", description = "User completed successfuly")
   public Mono<SignupResponse> signup(
