@@ -8,6 +8,7 @@ on:
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   IMAGE_TAG: latest
   SONAR_HOST_URL: https://sonarcloud.io
   SONAR_PROJECT_KEY: gf-hackaton-2025-1_service-user
@@ -27,16 +28,21 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Debug Sonar Variables
+        run: |
+          echo "SONAR_PROJECT_KEY: $SONAR_PROJECT_KEY"
+          echo "SONAR_ORGANIZATION: $SONAR_ORGANIZATION"
+          echo "SONAR_HOST_URL: $SONAR_HOST_URL"
+          echo "SONAR_TOKEN: $SONAR_TOKEN"
+
       - name: SonarCloud Scan
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
             -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
             -Dsonar.branch.name=main \
             -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=${{ env.SONAR_TOKEN }} \
 
       - name: Build application
         run: |
