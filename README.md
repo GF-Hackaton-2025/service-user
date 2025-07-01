@@ -9,7 +9,7 @@ O `service-user` é um microsserviço desenvolvido em Java 21 utilizando Spring 
 - ✅ Java 21
 - ✅ Spring WebFlux
 - ✅ Spring Security (JWT)
-- ✅ Kubernetes
+- ✅ Docker + Kubernetes
 - ✅ Terraform
 - ✅ AWS
 - ✅ Lombok
