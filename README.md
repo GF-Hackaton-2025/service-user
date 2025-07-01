@@ -49,3 +49,11 @@ http://<url_service>/swagger-ui/index.html
 ```
 docker build -t service-user .
 ```
+
+## 📝 Considerações Finais
+
+O ```service-user``` desempenha um papel central na arquitetura do projeto FIAP X - Sistema de Processamento de Vídeos, sendo responsável tanto pelo ```cadastro de novos usuários``` quanto pela ```autenticação``` e ```emissão de tokens JWT```.
+
+Implementado com Java 21 e o paradigma reativo do Spring WebFlux, o serviço foi projetado para lidar com alta concorrência, mantendo performance e escalabilidade. O cadastro de usuários é tratado com validações e persistência segura, preparando a base de dados para uma comunicação consistente com os demais microsserviços.
+
+A autenticação baseada em JWT garante uma estrutura moderna de segurança, permitindo que apenas usuários autorizados possam interagir com funcionalidades protegidas do sistema. O uso de Swagger facilita a integração e testes via documentação interativa, enquanto Docker, Kubernetes e Terraform asseguram uma implantação automatizada, versionada e padronizada.
