@@ -36,7 +36,16 @@ O `service-user` é um microsserviço desenvolvido em Java 21 utilizando Spring 
 - Maven 3.8+
 - Docker (opcional para execução em container)
 
-### Executar com Maven
+### 📁 Documentação da API
 
-```bash
-./mvnw spring-boot:run
+- Após a aplicação estar em execução, a documentação estará disponível em:
+
+```
+http://<url_service>/swagger-ui/index.html
+```
+
+### 🐳 Docker
+
+```
+docker build -t service-user .
+```
