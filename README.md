@@ -56,4 +56,4 @@ O ```service-user``` desempenha um papel central na arquitetura do projeto FIAP 
 
 Implementado com Java 21 e o paradigma reativo do Spring WebFlux, o serviço foi projetado para lidar com alta concorrência, mantendo performance e escalabilidade. O cadastro de usuários é tratado com validações e persistência segura, preparando a base de dados para uma comunicação consistente com os demais microsserviços.
 
-A autenticação baseada em JWT garante uma estrutura moderna de segurança, permitindo que apenas usuários autorizados possam interagir com funcionalidades protegidas do sistema. O uso de Swagger facilita a integração e testes via documentação interativa, enquanto Docker, Kubernetes e Terraform asseguram uma implantação automatizada, versionada e padronizada.
+A autenticação baseada em JWT garante uma estrutura moderna de segurança, permitindo que apenas usuários autorizados possam interagir com funcionalidades protegidas do sistema. O uso de Swagger facilita a integração e testes via documentação interativa, enquanto Docker, Kubernetes e Terraform asseguram uma implantação automatizada, versionada e padronizada. 
